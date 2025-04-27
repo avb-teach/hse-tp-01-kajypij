@@ -17,9 +17,7 @@ fi
 [ ! -d "$input_dir" ] && exit 1
 mkdir -p "$output_dir"
 process_item() {
-    local src=$1
-    local dest=$2
-    local depth=$3
+    local src=$1 dest=$2 depth=$3
     if [ -f "$src" ]; then
         filename=$(basename "$src")
         name="${filename%.*}"
@@ -36,16 +34,10 @@ process_item() {
         if [ "$preserve_structure" -eq 1 ] && [ "$depth" -lt "$max_depth" ]; then
             new_dest="$dest/$(basename "$src")"
             mkdir -p "$new_dest"
-            for item in "$src"/*; do
-                [ -e "$item" ] && process_item "$item" "$new_dest" $((depth + 1))
-            done
+            for item in "$src"/*; do [ -e "$item" ] && process_item "$item" "$new_dest" $((depth + 1)); done
         else
-            for item in "$src"/*; do
-                [ -e "$item" ] && process_item "$item" "$dest" $((depth + 1))
-            done
+            for item in "$src"/*; do [ -e "$item" ] && process_item "$item" "$dest" $((depth + 1)); done
         fi
     fi
 }
-for item in "$input_dir"/*; do
-    [ -e "$item" ] && process_item "$item" "$output_dir" 0
-done
+for item in "$input_dir"/*; do [ -e "$item" ] && process_item "$item" "$output_dir" 0; done
