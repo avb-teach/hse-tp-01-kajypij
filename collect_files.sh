@@ -19,7 +19,7 @@ fi
 
 [ ! -d "$input_dir" ] && exit 1
 mkdir -p "$output_dir"
-shopt -s nullglob #https://gist.github.com/shichao-an/9521450
+shopt -s nullglob #https://gist.github.com/shichao-an/9521450 #https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
 process_item() {
     local src=$1
     local dest=$2
