@@ -53,5 +53,5 @@ process_item() {
     fi
 }
 for item in "$input_dir"/*; do
-    [ -e "$item" ] && process_item "$item" "$output_dir" 0
+    [ -e "$item" ] && process_item "$item" "$output_dir" 1
 done
